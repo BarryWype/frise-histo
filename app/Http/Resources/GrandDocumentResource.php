@@ -16,7 +16,8 @@ class GrandDocumentResource extends JsonResource
     {
         return [
             'date' => $this->date,
-            'titre' => $this->fields['titre_du_document']
+            'titre' => $this->fields['titre_du_document'],
+            'description' => isset($this->fields['description_du_document']) ? $this->fields['description_du_document'] : ''
         ];
     }
 }

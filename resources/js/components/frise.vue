@@ -17,7 +17,20 @@
                         :data="dataArray"
                         :data-value="'date'"
                         :data-label="'titre'"
+                        @change="changeTitre"
                     ></vue-slider> 
+                </b-col>
+                <b-col md='8' offset='1'>
+                    <ul>
+                        <li v-for='doc in selection' :key='doc' >
+                            <b-card
+                            :title='doc.titre'>
+                                <b-card-text>
+                                    {{doc.description}}
+                                </b-card-text>
+                            </b-card>
+                        </li>
+                    </ul>
                 </b-col>
             </b-row>
         </article>
@@ -32,16 +45,27 @@
             .then((response)=>{
                 this.dataArray = response.data.data
             })
+            .then(()=>{
+                this.value = this.dataArray[0].date
+            })
         },
         data: function(){
             return {
                 value: 628,
-                dataAraay: [],
+                selection: null,
+                dataArray: [],
                 options: {
                     dotSize: 40,
                     direction: 'ttb',
                     height: 800,
                     tooltipPlacement: 'right',
+                }
+            }
+        },
+        methods: {
+            changeTitre(val){
+                if(val){
+                    this.selection = this.dataArray.filter(doc => doc.date == val)
                 }
             }
         }

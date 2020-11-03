@@ -23,6 +23,10 @@ class GrandDocumentEtImageDeFranceController extends Controller
             $doc->forceFill($docJson);
             $aDoc[] = $doc;
         }
-        return GrandDocumentResource::collection($aDoc);
+
+        $collection = collect($aDoc);
+        $collection = $collection->sortBy('date');
+
+        return GrandDocumentResource::collection($collection);
     }
 }

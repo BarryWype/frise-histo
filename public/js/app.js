@@ -1997,6 +1997,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'test',
   mounted: function mounted() {
@@ -2004,12 +2017,15 @@ __webpack_require__.r(__webpack_exports__);
 
     this.axios.get('/api/grand-document-et-image-de-france').then(function (response) {
       _this.dataArray = response.data.data;
+    }).then(function () {
+      _this.value = _this.dataArray[0].date;
     });
   },
   data: function data() {
     return {
       value: 628,
-      dataAraay: [],
+      selection: null,
+      dataArray: [],
       options: {
         dotSize: 40,
         direction: 'ttb',
@@ -2017,6 +2033,15 @@ __webpack_require__.r(__webpack_exports__);
         tooltipPlacement: 'right'
       }
     };
+  },
+  methods: {
+    changeTitre: function changeTitre(val) {
+      if (val) {
+        this.selection = this.dataArray.filter(function (doc) {
+          return doc.date == val;
+        });
+      }
+    }
   }
 });
 
@@ -73438,6 +73463,7 @@ var render = function() {
                         "data-value": "date",
                         "data-label": "titre"
                       },
+                      on: { change: _vm.changeTitre },
                       model: {
                         value: _vm.value,
                         callback: function($$v) {
@@ -73453,7 +73479,37 @@ var render = function() {
                 )
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _c("b-col", { attrs: { md: "8", offset: "1" } }, [
+              _c(
+                "ul",
+                _vm._l(_vm.selection, function(doc) {
+                  return _c(
+                    "li",
+                    { key: doc },
+                    [
+                      _c(
+                        "b-card",
+                        { attrs: { title: doc.titre } },
+                        [
+                          _c("b-card-text", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(doc.description) +
+                                "\n                            "
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                }),
+                0
+              )
+            ])
           ],
           1
         )
