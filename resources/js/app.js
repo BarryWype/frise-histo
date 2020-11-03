@@ -9,6 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import VueSlider from 'vue-slider-component'
 
@@ -22,6 +24,7 @@ import 'vue-slider-component/theme/antd.css'
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios)
 Vue.component('VueSlider', VueSlider)
 
 const router = new VueRouter({
